@@ -1,0 +1,365 @@
+//脚本对象:国都证券融资融券下单程序
+//更新日期：20131229
+//20131229增加信用闪电下单功能
+//201402增加对对话框的定制修改
+//201510增加对融券卖出对话框头寸类型的定制,修改string63239和对话框517、3077
+//20151020增加相关515,516,517,518,519,585,606等对话框的定制
+///////////////手工定制部分/////////////////
+//542担保品划转的字面介绍
+//520登录框的焦点(ctrl+D)顺序调整
+//查询里面的配号和中签删除掉
+
+
+[System]
+COPY .\gdzq.exe .\xiadan.exe
+SET File =xiadan.exe
+[Dialog]
+load #520
+set pos=cx:286,cy:353
+set 1008 pos=x:266,y:3
+set 1676 pos=x:254,y:3
+set {确定(&Y)} pos=x:219,y:27
+set {取消(&N)} pos=x:219,y:42
+set {隐藏帐户} pos=x:219,y:109
+set {保存帐户} pos=x:219,y:125
+set 1544 pos=x:219,y:141
+set {通讯设置(&S)} pos=x:219,y:87
+set {高级设置(&U)} pos=x:219,y:57
+set {主站测速(&T)} pos=x:219,y:72
+show {主站测速(&T)}
+set 1084 size=cx:138,cy:160
+set 1085 pos=cx:138,cy:159
+set 1237 size=cx:138,cy:120
+set 1011 size=cx:138,cy:160
+set 1151 pos=x:315,y:227
+set 1675 pos=x:115,y:105
+hide 1675
+set 3001 pos=x:12,y:112
+set 1003 pos=x:64,y:109
+set 1499 pos=x:101,y:109
+set 1420 pos=x:9,y:152
+set 1603 size=x:285,y:1
+set 1603 pos=x:0,y:167
+
+rem 移除的部分
+set {添加营业部} pos=x:425,y:5
+set 1605 pos=x:425,y:21
+set 1824 pos=x:425,y:37
+set 1183 pos=x:315,y:57
+set 1184 pos=x:333,y:75
+set 1113 pos=x:300,y:85
+set 1181 pos=x:362,y:83
+set 1108 pos=x:316,y:119
+set 1005 pos=x:370,y:117
+set 1182 pos=x:325,y:146
+set 1001 pos=x:379,y:144
+set 1107 pos=x:309,y:175
+set 1004 pos=x:363,y:173
+set 1825 pos=x:306,y:197
+
+rem 融资买入
+load #514
+hide 3013
+hide 3004
+hide 1691
+hide 2044
+
+rem 卖券还款
+load #515
+hide 3013
+hide 3004
+set 32790 pos=x:272,y:177
+set 3551 pos=x:312,y:179
+set 30001 pos=x:383,y:177
+set 30002 pos=x:428,y:177
+set 30003 pos=x:464,y:177
+set 1321 pos=x:398,y:217
+set 1322 pos=x:434,y:217
+set 2029 pos=x:470,y:217
+set 2176 pos=x:371,y:154
+set 2177 pos=x:452,y:153
+set 1355 size=cx:257,cy:13
+hide 3017
+
+rem 直接还款 516
+load #516
+set {操作类型} pos=x:270,y:118
+hide {操作类型}
+set 2053 pos=x:307,y:116
+hide 2053
+set {流水编号} pos=x:16,y:102
+set 1037 pos=x:53,y:100
+set {还款金额} pos=x:16,y:114
+set 2985 pos=x:53,y:112
+set {重填[&R]} pos=x:16,y:128
+set {确定[&S]} pos=x:69,y:128
+set {全部选中} pos=x:144,y:169
+set {批量还款} pos=x:198,y:169
+set {保存优先级调整} pos=x:251,y:169
+set {取消设置} pos=x:338,y:169
+set 1355 size=cx:140,cy:13
+set 1355 pos=x:0,y:173
+set 1047 pos=x:0,y:185
+set 3013 pos=x:0,y:150
+set 1950 pos=x:53,y:148
+
+rem 融券卖出
+load #517
+hide 3013
+hide 3004
+hide 1691
+hide 2044
+set 3020 pos=x:10,y:146
+set 3458 pos=x:47,y:142
+set 1355 size=cx:258,cy:13
+set {上一页} pos=x:407,y:120
+set {下一页} pos=x:443,y:120
+set {汇总} pos=x:479,y:120
+set 32790 pos=x:268,y:156
+set 3551 pos=x:312,y:158
+set 30001 pos=x:383,y:156
+set 30002 pos=x:428,y:156
+set 30003 pos=x:464,y:156
+
+rem 买券还券
+load #518
+hide 3013
+hide 3004
+set 2176 pos=x:392,y:145
+set 2177 pos=x:472,y:145
+set 32790 pos=x:288,y:167
+set 3551 pos=x:332,y:169
+set 30001 pos=x:403,y:167
+set 30002 pos=x:448,y:167
+set 30003 pos=x:484,y:167
+set 1355 size=cx:268,cy:13
+
+rem 直接换券 519
+load #519
+set 1355 size=cx:165,cy:13
+set 1355 pos=x:0,y:170
+set 1047 pos=x:0,y:182
+set 2176 pos=x:223,y:165
+set 2177 pos=x:308,y:165
+
+rem 信用买入
+load #536
+hide 3013
+hide 3004
+rem 信用卖出
+load #537
+hide 3013
+hide 3004
+set 3014 title=可委托数量
+show 3014
+show 3005
+set 3014 pos=x:8,y:119
+set 3005 pos=x:54,y:117
+
+rem 担保品划转
+load #542
+hide 1936
+hide 1037
+hide 1937
+hide 1038
+set 1325 size=cx:321,cy:88
+set 1407 size=cx:311,cy:75
+set 1407 title=说明：$\r$\n$\r$\n1、信用=>普通：从信用账户到普通账户；普通=>信用：从普通账户到信用账户；$\r$\n$\r$\n2、划转深圳市场担保品时，请确保上方选择帐号处为“深圳”；$\r$\n$\r$\n3、划转上海市场担保品时，请确保上方选择帐号处为“上海”；
+
+
+
+rem 市价信用买入
+load #572 
+hide 3013
+hide 3004
+rem 市价融资买入
+load #573
+hide 3013
+hide 3004
+hide 1691
+hide 2044
+rem 市价信用卖出
+load #574
+hide 3013
+hide 3004
+
+rem 市价卖券还款
+load #585
+hide 3013
+hide 3004
+hide 3017
+set 1355 size=cx:257,cy:13
+set 32790 pos=x:268,y:186
+set 3551 pos=x:312,y:188
+set 30001 pos=x:383,y:186
+set 30002 pos=x:428,y:186
+set 30003 pos=x:464,y:186
+set 1321 pos=x:421,y:203
+set 1322 pos=x:457,y:203
+set 2029 pos=x:493,y:203
+set 2176 pos=x:367,y:163
+set 2177 pos=x:451,y:163
+
+rem 市价买券还券
+load #586
+hide 3013
+hide 3004
+set 1355 size=cx:257,cy:13
+set 32790 pos=x:268,y:186
+set 3551 pos=x:312,y:188
+set 30001 pos=x:383,y:186
+set 30002 pos=x:428,y:186
+set 30003 pos=x:464,y:186
+set 1321 pos=x:409,y:206
+set 1322 pos=x:445,y:206
+set 2029 pos=x:481,y:206
+set 2176 pos=x:365,y:163
+set 2177 pos=x:451,y:163
+
+rem 闪电下单对话框
+load #606
+set 3001 pos=x:16,y:43
+set 1032 pos=x:55,y:41
+set 3002 pos=x:16,y:55
+set 1036 pos=x:55,y:53
+set 1400 pos=x:16,y:67
+set 1033 pos=x:55,y:65
+set 1068 pos=x:101,y:65
+set 1401 pos=x:16,y:79
+set 1018 pos=x:55,y:77
+set 1399 pos=x:16,y:91
+set 1034 pos=x:55,y:89
+set 1071 pos=x:100,y:89
+set 1202 pos=x:110,y:89
+set 1132 pos=x:114,y:91
+set 1841 pos=x:112,y:54
+set 1007 pos=x:18,y:106
+set 1006 pos=x:73,y:106
+
+
+rem 银证转账
+load #816
+hide 2029
+rem 精简模式限价信用买入
+load #3073
+hide 3013
+hide 3004
+
+
+rem 新股申购主界面
+load #3250
+hide 3013
+hide 3004
+set 3015 size=cx:296,cy:106
+set 3015 title=新股申购规则特别提示：$\n$\n1、T+1日公布中签率，T+2日公布中签结果。$\n$\n2、摇号中签后，应依据中签结果履行资金交收义务，确保资金账户在T+2日16：00前足额的新股认购资金。$\n$\n3、投资者认购资金不足的，不足部分视为放弃认购，由此产生的后果及相关法律责任，由投资者自行承担。投资者12个月内累计出现3次中签但未足额缴款的情形时，自结算参与人最近一次申报其放弃认购的次日起6个月（按180个自然日计算，含次日）内不得参与网上新股申购。$\n$\n4、放弃认购的次数按照投资者实际放弃认购的新股只数计算。
+
+
+
+rem 精简模式限价信用卖出
+load #3074
+hide 3013
+hide 3004
+set 3014 title=可委托数量
+show 3014
+show 3005
+set 3014 pos=x:8,y:119
+set 3005 pos=x:55,y:117
+
+
+rem 精简模式限价卖券还款
+load #3075
+hide 3013
+hide 3004
+rem 精简模式限价买券还券
+load #3076 
+hide 3013
+hide 3004
+rem 精简模式限价融券卖出
+load #3077
+hide 3013
+hide 3004
+hide 1691
+hide 2044
+
+rem 精简模式限价融资买入
+load #3078
+hide 3013
+hide 3004
+hide 1691
+hide 2044
+rem 精简模式市价信用卖出
+load #3079
+hide 3013
+hide 3004
+rem 精简模式市价信用买入
+load #3080
+hide 3013
+hide 3004
+rem 精简模式市价卖券还款
+load #3081
+hide 3013
+hide 3004
+rem 精简模式市价买券还券
+load #3082
+hide 3013
+hide 3004
+rem 精简模式市价融券卖出
+load #3083
+hide 3013
+hide 3004
+hide 1691
+hide 2044
+rem 精简模式市价融资买入
+load #3084
+hide 3013
+hide 3004
+hide 1691
+hide 2044
+
+rem 批量新股申购界面文字说明调整
+load #3159
+show 115
+set 115 size=cx:296,cy:105
+set 115 pos=x:198,y:6
+set 115 title=新股申购规则特别提示：$\n$\n1、T+1日公布中签率，T+2日公布中签结果。$\n$\n2、摇号中签后，应依据中签结果履行资金交收义务，确保资金账户在T+2日16：00前足额的新股认购资金。$\n$\n3、投资者认购资金不足的，不足部分视为放弃认购，由此产生的后果及相关法律责任，由投资者自行承担。投资者12个月内累计出现3次中签但未足额缴款的情形时，自结算参与人最近一次申报其放弃认购的次日起6个月（按180个自然日计算，含次日）内不得参与网上新股申购。$\n$\n4、放弃认购的次数按照投资者实际放弃认购的新股只数计算。
+set 1098 pos=x:0,y:107
+set 1007 pos=x:52,y:107
+set 1006 pos=x:101,y:107
+set 2148 pos=x:104,y:106
+set 1047 pos=x:0,y:126
+
+rem 缴款顺序
+load #9115
+set 1319 pos=x:68,y:7
+set 1319 size=cx:454,cy:18
+set 1319 title=缴款顺序的值越小，缴款优先级越高！如不进行调整，数值相同系统默认按成交金额（即：中签数量*申购价格）$\n较小的优先进行缴款！数字输入有效范围1-99。
+set 1047 pos=x:0,y:29
+
+
+[String]
+set 32929=11000,0000Y;11100,11000;11100,00000;10100,00110;10110,11100;00000,00100;00100,00010;00000,00000;00000,00000;00000,00000;00000,00000;00000,00300;00000,00000;0000
+set 40056=http://www.guodu.com
+set 57344=国都证券网上交易客户端
+set 57345=国都证券有限责任公司
+set 57356=60资金帐户\n1深圳帐户\n2上海帐户\n3基金帐户\n4深圳Ｂ股\n5上海Ｂ股
+set 57357=ZN0OJ,000D0;A1000,1N1MH;NN001,10001;00NNS,NNQDH;CNNHT,10001;00000,10000;00000,00000;00000,00000;00000,00000;00000,00000;
+set 59202=http://www.guodu.com/guodu/softdl/softdl.jsp?classID=10153
+set 59203=开放式基金账户开户表单下载
+set 59396=0信 用[513]
+set 59399=1|现金分红|2|红利转投|
+set 61518=3601|---请选择---|1029|交易密码|
+set 61547=1|32820|退出; 1|32771|登录; 1|32772|锁屏; 1|32790|刷新; 0|32812|精简; 0|40059|短信; 0|32773|理财; 1|30006|安全; 0|32791|打印; 0|57670|系统; 1|3323|系统(点击显示系统设置);
+set 61598= 
+set 61600=3601|---请选择---|1558|信用交易密码|
+set 61634=123456789
+set 61745=rqfz|融券负债|gupiao|股票|zdyhk|自定义还款|
+set 61956=rzfz|融资负债|zdyhk|自定义还款|
+set 61959=rqfz|融券负债|gupiao|股票(W)|chengjiao|成交(E)|weituo|委托(R)|zdyhk|自定义还款|
+set 61960=rzfz|融资负债|gupiao|股票(W)|chengjiao|成交(E)|weituo|委托(R)|zdyhk|自定义还款|
+set 62208=gupiao|股票|
+rem 定制担保品中的上A变成沪A
+set 62264=16=沪A\n32=深A\n18=上B\n34=深B\n35=三板A\n
+rem 修改闪电下单弹出的界面中信用买入和信用卖出字样为普通买入和普通卖出依符合国都的要求
+set 62435=455=普通买入\n456=普通卖出\n448=融资买入\n451=融券卖出\n452=买券还券\n449=卖券还款\n
+set 63239=gupiao|股票(W)|chengjiao|成交(E)|weituo|委托(R)|mcbdq|标的券|rztcxx|头寸信息|
+set 63240=1|共享|2|独占
